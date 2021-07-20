@@ -27,8 +27,8 @@ public class App {
         scanner.close();
         
 
-        System.out.println(getRelativeBalance(accountId, fromDate, toDate));
-        // System.out.println(getRelativeBalance("ACC334455", "20/10/2018 12:00:00", "20/10/2018 19:00:00"));
+        // System.out.println(getRelativeBalance(accountId, fromDate, toDate));
+        System.out.println(getRelativeBalance("ACC334455", "20/10/2018 12:00:00", "20/10/2018 19:00:00"));
     }
 
     private static String getRelativeBalance(String accountId, String fromDateString, String toDateString)
@@ -88,7 +88,17 @@ public class App {
             BufferedReader reader = new BufferedReader(new FileReader("src/transactions.csv"));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
+                transactionList.add(parseTransaction(line));
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+        return transactionList;
+    }
+
+    private static Transaction parseTransaction(String line) throws ParseException {
+        String[] values = line.split(",");
                 String transactionId = values[0].trim();
                 String fromAccountId = values[1].trim();
                 String toAccountId = values[2].trim();
@@ -104,13 +114,7 @@ public class App {
                     transaction = new Transaction(transactionId, fromAccountId, toAccountId, createdAt, amount,
                             transactionType);
                 }
-                transactionList.add(transaction);
-            }
-            reader.close();
-        } catch (Exception e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
-        return transactionList;
+                return transaction;
     }
 
     private static Date stringToDate(String dateString) throws ParseException {
