@@ -46,7 +46,7 @@ public class App {
         double balance = 0;
         int transactionCount = 0;
         for (Transaction tx : accountTransactions) {
-            if (!lookupReversal(tx, reversaltransactions)) {
+            if (!hasReversal(tx, reversaltransactions)) {
                 transactionCount++;
                 if (tx.getFromAccountId().equals(accountId)) {
                     balance -= tx.getAmount();
@@ -107,7 +107,7 @@ public class App {
         return date;
     }
 
-    private static boolean lookupReversal(Transaction transaction, List<Transaction> reversals) {
+    private static boolean hasReversal(Transaction transaction, List<Transaction> reversals) {
         for( Transaction tx : reversals) {
             if (tx.getRelatedTransaction().equals(transaction.getId())) {
                 return true;
