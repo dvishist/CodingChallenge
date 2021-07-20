@@ -35,6 +35,34 @@ public class Transaction {
         this.relatedTransaction = relatedTransaction;
     }
 
+    public String getId(){
+        return this.transactionId;
+    }
+
+    public String getFromAccountId() {
+        return this.fromAccountId;
+    }
+    
+    public String getToAccountId() {
+        return this.toAccountId;
+    }
+
+    public Date getDate() {
+        return this.createdAt;
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
+
+    public TransactionType getTransactionType() {
+        return this.transactionType;
+    }
+
+    public String getRelatedTransaction(){
+        return this.relatedTransaction;
+    }
+
     @Override
     public String toString() {
         String output = "";
