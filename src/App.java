@@ -30,7 +30,7 @@ public class App {
                         || transaction.getToAccountId().equals(accountId)));
         
         //create a list of reversal transactions for lookup
-        List<Transaction> reversaltransactions = transactionList.stream()
+        List<Transaction> reversalTransactions = transactionList.stream()
                 .filter(transaction -> transaction.getTransactionType()== TransactionType.REVERSAL)
                 .collect(Collectors.toList());
 
@@ -46,7 +46,7 @@ public class App {
         double balance = 0;
         int transactionCount = 0;
         for (Transaction tx : accountTransactions) {
-            if (!hasReversal(tx, reversaltransactions)) {
+            if (!hasReversal(tx, reversalTransactions)) {
                 transactionCount++;
                 if (tx.getFromAccountId().equals(accountId)) {
                     balance -= tx.getAmount();
