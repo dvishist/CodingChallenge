@@ -2,7 +2,6 @@ package models;
 
 import java.util.Date;
 
-
 public class Transaction {
 
     private String transactionId;
@@ -22,7 +21,6 @@ public class Transaction {
         this.amount = amount;
         this.transactionType = transactionType;
     }
-    
 
     public Transaction(String transactionId, String fromAccountId, String toAccountId, Date createdAt, double amount,
             TransactionType transactionType, String relatedTransaction) {
@@ -35,14 +33,14 @@ public class Transaction {
         this.relatedTransaction = relatedTransaction;
     }
 
-    public String getId(){
+    public String getId() {
         return this.transactionId;
     }
 
     public String getFromAccountId() {
         return this.fromAccountId;
     }
-    
+
     public String getToAccountId() {
         return this.toAccountId;
     }
@@ -59,7 +57,7 @@ public class Transaction {
         return this.transactionType;
     }
 
-    public String getRelatedTransaction(){
+    public String getRelatedTransaction() {
         return this.relatedTransaction;
     }
 
@@ -80,8 +78,5 @@ public class Transaction {
         output += "\n-----------------------------------------------";
         return output;
     }
-    
-    
-
 
 }
