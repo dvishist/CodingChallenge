@@ -42,22 +42,32 @@ public class App {
         // collect the stream back into a List
         List<Transaction> accountTransactions = transactionStream.collect(Collectors.toList());
 
-        //reduce the list into a relative balance
+        //reduce the list into a relative balance and count transactions
         double balance = 0;
         int transactionCount = 0;
         for (Transaction tx : accountTransactions) {
             if (!lookupReversal(tx, reversaltransactions)) {
-                transactionCount = transactionCount + 1;
+                transactionCount++;
                 if (tx.getFromAccountId().equals(accountId)) {
-                    balance = balance - tx.getAmount();
+                    balance -= tx.getAmount();
                 } else {
-                    balance = balance + tx.getAmount();
+                    balance += tx.getAmount();
                 }
-
             }
         }
-        System.out.println(balance + " AND " + transactionCount);
-        return "";
+
+        String balanceString = "$";
+        if (balance < 0) {
+            balanceString = "-" + balanceString + Math.abs(balance); 
+        } else {
+            balanceString = balanceString + Math.abs(balance);
+        }
+        
+        String output = "";
+        output += "Relative balance for the period is: " + balanceString;
+        output += "\nNumber of transactions included is: " + transactionCount;
+
+        return output;
     }
 
     private static List<Transaction> parseCsv() {
