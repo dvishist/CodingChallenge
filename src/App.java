@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.io.BufferedReader;
@@ -16,7 +17,18 @@ public class App {
     static List<Transaction> transactionList = parseCsv();
 
     public static void main(String[] args) throws Exception {
-        System.out.println(getRelativeBalance("ACC334455", "20/10/2018 12:00:00", "20/10/2018 19:00:00"));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Account ID: ");
+        String accountId = scanner.nextLine();
+        System.out.println("Enter start Date: ");
+        String fromDate = scanner.nextLine();
+        System.out.println("Enter end Date: ");
+        String toDate = scanner.nextLine();
+        scanner.close();
+        
+
+        System.out.println(getRelativeBalance(accountId, fromDate, toDate));
+        // System.out.println(getRelativeBalance("ACC334455", "20/10/2018 12:00:00", "20/10/2018 19:00:00"));
     }
 
     private static String getRelativeBalance(String accountId, String fromDateString, String toDateString)
